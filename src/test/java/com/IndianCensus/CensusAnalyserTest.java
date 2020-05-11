@@ -28,4 +28,14 @@ public class CensusAnalyserTest {
         }
     }
 
+    @Test
+    public void givenCSVFileWithIncorrectHeader_ShouldThrowAnException(){
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            censusAnalyser.testFileIfIncorrect(INCOMPATIBLE_CSV_FILE_PATH);
+        } catch (CensusAnalyserException  e) {
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.DATA_NOT_APPROPRIATE,e.type);
+        }
+    }
+
 }
