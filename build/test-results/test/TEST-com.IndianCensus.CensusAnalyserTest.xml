@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.IndianCensus.CensusAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-05-11T11:24:35" hostname="KYOOLBABA" time="0.145">
+<testsuite name="com.IndianCensus.CensusAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-05-11T12:59:15" hostname="KYOOLBABA" time="0.144">
   <properties/>
-  <testcase name="givenCSVFileWithIncorrectHeader_ShouldThrowAnException" classname="com.IndianCensus.CensusAnalyserTest" time="0.145"/>
+  <testcase name="givenIndianStateCode" classname="com.IndianCensus.CensusAnalyserTest" time="0.144"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
