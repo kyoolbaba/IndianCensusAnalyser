@@ -3,7 +3,7 @@ package com.IndianCensus;
 public class CensusAnalyserException extends Exception {
 
     enum ExceptionType {
-        CENSUS_FILE_PROBLEM
+        CENSUS_FILE_PROBLEM, FILE_NOT_PRESENT,DATA_NOT_APPROPRIATE,CORRECT_FILE,INCORRECT_DELIMITER
     }
 
     ExceptionType type;
