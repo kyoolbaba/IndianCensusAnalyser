@@ -40,15 +40,15 @@ public class CensusAnalyserTest {
         }
     }
 
-    @Test
-    public void givenCSVFileWithIncorrectDelimter_ShouldThrowException(){
-        try {
-            CensusAnalyser censusAnalyser = new CensusAnalyser();
-            censusAnalyser.checkDelimiter(INDIA_CENSUS_CSV_FILE_PATH);
-        } catch (CensusAnalyserException  e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER,e.type);
-        }
-    }
+//    @Test
+//    public void givenCSVFileWithIncorrectDelimter_ShouldThrowException(){
+//        try {
+//            CensusAnalyser censusAnalyser = new CensusAnalyser();
+//            censusAnalyser.checkDelimiter(INDIA_CENSUS_CSV_FILE_PATH);
+//        } catch (CensusAnalyserException  e) {
+//            Assert.assertEquals(CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER,e.type);
+//        }
+//    }
 
     @Test
     public void givenIndianStateCode() throws CensusAnalyserException {
