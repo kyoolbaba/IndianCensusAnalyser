@@ -10,15 +10,15 @@ public class OpenCSVBuilder <E> implements ICSVBuilder {
 
     public Iterator<E> getCSVFileIterator
             (Reader reader, Class csvClass)
-            throws CensusAnalyserException {
+            throws CSVBuilderException {
       try{
             CsvToBean<E> csvToBean= new CsvToBeanBuilder<E>(reader)
                     .withIgnoreLeadingWhiteSpace(true)
                     .withType(csvClass).build();
             return (Iterator<E>) csvToBean.iterator();
         }catch(IllegalStateException e){
-            throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.NOT_ABLE_TO_PARSE);
+            throw new CSVBuilderException(e.getMessage(),
+                    CSVBuilderException.ExceptionType.NOT_ABLE_TO_PARSE);
         }
     }
 }
