@@ -16,8 +16,9 @@ public class CensusAnalyser {
     private static final String INDIA_CENSUS_CSV_FILE_PATH = "C:\\Users\\KYOOLBABAA\\Desktop\\New folder\\StateCensusData.csv";
 
     public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
+        ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
-            Iterator<IndiaCensusCSV> censusCSVIterator = new OpenCSVBuilder().getCSVFileIterator(reader,IndiaCensusCSV.class);
+            Iterator<IndiaCensusCSV> censusCSVIterator = csvBuilder.getCSVFileIterator(reader,IndiaCensusCSV.class);
             return getCount(censusCSVIterator);
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
@@ -26,8 +27,7 @@ public class CensusAnalyser {
     }
 
     public void testFileIfIncorrect(String csvFilePath) throws CensusAnalyserException {
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
+        try ( Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
             CsvToBeanBuilder<IndiaCensusCSV> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
             csvToBeanBuilder.withType(IndiaCensusCSV.class);
             csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
@@ -37,7 +37,6 @@ public class CensusAnalyser {
             }catch(RuntimeException e){
                 throw new CensusAnalyserException("Data not Compatible",CensusAnalyserException.ExceptionType.DATA_NOT_APPROPRIATE);
             }catch(IOException e){
-
             }
             if(INDIA_CENSUS_CSV_FILE_PATH==csvFilePath) {
                 throw new CensusAnalyserException("Wrong file path given",CensusAnalyserException.ExceptionType.CORRECT_FILE);
@@ -65,7 +64,8 @@ public class CensusAnalyser {
     public int loadIndianStateCode(String csvFilePath) throws CensusAnalyserException{
         try {
             Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
-            Iterator<IndiaStateCodeCSV> censusCSVIterator =  new OpenCSVBuilder().getCSVFileIterator(reader,IndiaStateCodeCSV.class);
+            ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
+            Iterator<IndiaStateCodeCSV> censusCSVIterator =  csvBuilder.getCSVFileIterator(reader,IndiaStateCodeCSV.class);
             return getCount(censusCSVIterator);
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
