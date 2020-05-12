@@ -51,7 +51,7 @@ public class CensusAnalyserTest {
 //    }
 
     @Test
-    public void givenIndianStateCode() throws CensusAnalyserException {
+    public void givenIndianStateCodeCSVFileReturnsCorrectRecord() throws CensusAnalyserException {
         CensusAnalyser censusAnalyser=new CensusAnalyser();
         int numberOfStateCodes= censusAnalyser.loadIndianStateCode(INDIAN_STATE_CODES);
         Assert.assertEquals(37,numberOfStateCodes);
