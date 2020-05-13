@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.IndianCensus.CensusAnalyserTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2020-05-13T05:23:17" hostname="KYOOLBABA" time="0.281">
+<testsuite name="com.IndianCensus.CensusAnalyserTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2020-05-13T13:04:53" hostname="KYOOLBABA" time="0.536">
   <properties/>
-  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="com.IndianCensus.CensusAnalyserTest" time="0.237"/>
-  <testcase name="givenCSVFileWithIncorrectHeader_ShouldThrowAnException" classname="com.IndianCensus.CensusAnalyserTest" time="0.009"/>
+  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="com.IndianCensus.CensusAnalyserTest" time="0.27"/>
+  <testcase name="givenCSVFileWithIncorrectHeader_ShouldThrowAnException" classname="com.IndianCensus.CensusAnalyserTest" time="0.095"/>
+  <testcase name="givenIndianCensusDataWhenSortedShouldReturnResult" classname="com.IndianCensus.CensusAnalyserTest" time="0.126"/>
   <testcase name="givenIndiaCensusData_WithWrongFile_ShouldThrowException" classname="com.IndianCensus.CensusAnalyserTest" time="0.003"/>
-  <testcase name="givenIndianStateCodeCSVFileReturnsCorrectRecord" classname="com.IndianCensus.CensusAnalyserTest" time="0.03"/>
+  <testcase name="givenIndianStateCodeCSVFileReturnsCorrectRecord" classname="com.IndianCensus.CensusAnalyserTest" time="0.039"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
