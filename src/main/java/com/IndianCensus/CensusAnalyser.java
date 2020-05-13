@@ -44,17 +44,17 @@ public class CensusAnalyser {
             csvToBeanBuilder.withType(IndiaCensusCSV.class);
             csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
             CsvToBean<IndiaCensusCSV> csvToBean = csvToBeanBuilder.build();
-             } catch(NoSuchFileException e){
-                throw new CensusAnalyserException("Wrong File Given",CensusAnalyserException.ExceptionType.FILE_NOT_PRESENT);
-            }catch(RuntimeException e){
-                throw new CensusAnalyserException("Data not Compatible",CensusAnalyserException.ExceptionType.DATA_NOT_APPROPRIATE);
-            }catch(IOException e){
+        } catch(NoSuchFileException e){
+            throw new CensusAnalyserException("Wrong File Given",CensusAnalyserException.ExceptionType.FILE_NOT_PRESENT);
+        }catch(RuntimeException e){
+            throw new CensusAnalyserException("Data not Compatible",CensusAnalyserException.ExceptionType.DATA_NOT_APPROPRIATE);
+        }catch(IOException e){
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
-            }
-            if(INDIA_CENSUS_CSV_FILE_PATH==csvFilePath) {
-                throw new CensusAnalyserException("Wrong file path given",CensusAnalyserException.ExceptionType.CORRECT_FILE);
-            }
+        }
+        if(INDIA_CENSUS_CSV_FILE_PATH==csvFilePath) {
+            throw new CensusAnalyserException("Wrong file path given",CensusAnalyserException.ExceptionType.CORRECT_FILE);
+        }
     }
 
     public static void main(String[] args) throws CensusAnalyserException {
@@ -96,7 +96,6 @@ public class CensusAnalyser {
         Iterable<E>csvIterable=() -> iterator;
         return (int) StreamSupport.stream(csvIterable.spliterator(),true).count();
     }
-
 
     public String getStateWiseSortedCensusData() throws CensusAnalyserException {
         Comparator<IndiaCensusDAO> censusCSVComparator=Comparator.comparing(census->census.state);
