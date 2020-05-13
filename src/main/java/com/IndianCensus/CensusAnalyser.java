@@ -70,11 +70,9 @@ public class CensusAnalyser {
                     .withType(IndiaStateCodeCSV.class)
                     .withIgnoreLeadingWhiteSpace(true).build();
         }catch(IOException e){
-            System.out.println("HEY1");
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         }catch(RuntimeException e){
-            System.out.println("HEY");
             throw new CensusAnalyserException("Incorrect delimiter used",
                     CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER);
         }
@@ -101,23 +99,22 @@ public class CensusAnalyser {
 
 
     public String getStateWiseSortedCensusData() throws CensusAnalyserException {
-        if(censusList==null||censusList.size()==0){
-            throw new CensusAnalyserException("No Census data ",CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
-        }
         Comparator<IndiaCensusDAO> censusCSVComparator=Comparator.comparing(census->census.state);
-        this.sort(censusCSVComparator);
-        String sortedStateensusjson=new Gson().toJson(this.censusList);
-        return sortedStateensusjson;
+        return this.sortWithRespectToColumn(censusCSVComparator);
     }
 
     public String getPopulationWiseSortedCensusData() throws CensusAnalyserException {
+        Comparator<IndiaCensusDAO> censusCSVComparator=Comparator.comparing(census->census.population);
+        return this.sortWithRespectToColumn(censusCSVComparator);
+    }
+
+    public String sortWithRespectToColumn(Comparator censusSortColumn) throws CensusAnalyserException {
         if(censusList==null||censusList.size()==0){
             throw new CensusAnalyserException("No Census data ",CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-        Comparator<IndiaCensusDAO> censusCSVComparator=Comparator.comparing(census->census.population);
-        this.sort(censusCSVComparator);
-        String sortedStateensusjson=new Gson().toJson(this.censusList);
-        return sortedStateensusjson;
+        this.sort(censusSortColumn);
+        String sortedColumnensusjson=new Gson().toJson(this.censusList);
+        return sortedColumnensusjson;
     }
 
     private void sort( Comparator<IndiaCensusDAO> censusCSVComparator) {
