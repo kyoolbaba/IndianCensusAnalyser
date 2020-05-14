@@ -8,14 +8,12 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.StreamSupport;
 
 public class CensusAnalyser {
     List<IndiaCensusDAO> censusList=null;
+    Map maping=null;
     private static final String INDIA_CENSUS_CSV_FILE_PATH = "C:\\Users\\KYOOLBABAA\\Desktop\\New folder\\StateCensusData.csv";
 
     public CensusAnalyser() {
@@ -79,10 +77,15 @@ public class CensusAnalyser {
     }
 
     public int loadIndianStateCode(String csvFilePath) throws CensusAnalyserException{
+        Map mapping=new HashMap();
+        mapping.put("State","state");
+        mapping.put("Population","population");
+        mapping.put("AreaInSqKm","area");
+        mapping.put("DensityPerSqKm","density");
         try {
             Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            censusList =  csvBuilder.getCSVFileList(reader,IndiaStateCodeCSV.class);
+            censusList =  csvBuilder.setCSVMapAndGetList(reader,IndiaStateCodeCSV.class,mapping);
             return this.censusList.size();
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
