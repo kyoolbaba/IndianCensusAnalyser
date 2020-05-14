@@ -107,6 +107,17 @@ public class CensusAnalyser {
         return this.sortWithRespectToColumn(censusCSVComparator);
     }
 
+
+    public String getDensityWiseSortedCensusData() throws CensusAnalyserException {
+        Comparator<IndiaCensusDAO> censusCSVComparator=Comparator.comparing(census->census.densityPerSqKm);
+        return this.sortWithRespectToColumn(censusCSVComparator);
+    }
+
+    public String getAreaWiseSortedCensusData() throws CensusAnalyserException {
+        Comparator<IndiaCensusDAO> censusCSVComparator=Comparator.comparing(census->census.areaInSqKm);
+        return this.sortWithRespectToColumn(censusCSVComparator);
+    }
+
     public String sortWithRespectToColumn(Comparator censusSortColumn) throws CensusAnalyserException {
         if(censusList==null||censusList.size()==0){
             throw new CensusAnalyserException("No Census data ",CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
