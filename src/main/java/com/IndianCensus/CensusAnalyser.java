@@ -3,32 +3,34 @@ package com.IndianCensus;
 import com.google.gson.Gson;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+import jdk.nashorn.api.scripting.ScriptObjectMirror;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class CensusAnalyser {
-    List<IndiaCensusDAO> censusList=null;
-    Map maping=null;
-    private static final String INDIA_CENSUS_CSV_FILE_PATH = "C:\\Users\\KYOOLBABAA\\Desktop\\New folder\\StateCensusData.csv";
+    Map<String, IndiaCensusDAO> censusStateMap =null;
+    List<IndiaCensusCSV> censusList= new ArrayList<>();
+
 
     public CensusAnalyser() {
-        this.censusList = new ArrayList<IndiaCensusDAO>();
+        this.censusStateMap = new HashMap<>();
     }
 
     public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
         ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
             Iterator<IndiaCensusCSV> csvFileIterator = csvBuilder.getCSVFileIterator(reader, IndiaCensusCSV.class);
-            while(csvFileIterator.hasNext()){
-                this.censusList.add(new IndiaCensusDAO( csvFileIterator.next()));
-            }
-            return this.censusList.size();
-        } catch (IOException e) {
+            Iterable<IndiaCensusCSV> csvIterable= () ->csvFileIterator;
+            StreamSupport.stream(csvIterable.spliterator(),false)
+                    .forEach(censusCSV -> censusStateMap.put(censusCSV.state,new IndiaCensusDAO(censusCSV)));
+            return censusStateMap.size();
+        } catch (IOException |RuntimeException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         }catch(CSVBuilderException e){
@@ -36,57 +38,12 @@ public class CensusAnalyser {
         }
     }
 
-    public void testFileIfIncorrect(String csvFilePath) throws CensusAnalyserException {
-        try ( Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
-            CsvToBeanBuilder<IndiaCensusCSV> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
-            csvToBeanBuilder.withType(IndiaCensusCSV.class);
-            csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
-            CsvToBean<IndiaCensusCSV> csvToBean = csvToBeanBuilder.build();
-        } catch(NoSuchFileException e){
-            throw new CensusAnalyserException("Wrong File Given",CensusAnalyserException.ExceptionType.FILE_NOT_PRESENT);
-        }catch(RuntimeException e){
-            throw new CensusAnalyserException("Data not Compatible",CensusAnalyserException.ExceptionType.DATA_NOT_APPROPRIATE);
-        }catch(IOException e){
-            throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }
-        if(INDIA_CENSUS_CSV_FILE_PATH==csvFilePath) {
-            throw new CensusAnalyserException("Wrong file path given",CensusAnalyserException.ExceptionType.CORRECT_FILE);
-        }
-    }
-
-    public static void main(String[] args) throws CensusAnalyserException {
-        CensusAnalyser censusAnalyser=new CensusAnalyser();
-        censusAnalyser.checkDelimiter(INDIA_CENSUS_CSV_FILE_PATH);
-    }
-
-    public void checkDelimiter(String csvFilePath) throws CensusAnalyserException {
-        try{
-            Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
-            CsvToBean<IndiaStateCodeCSV> csvToBean = new CsvToBeanBuilder<IndiaStateCodeCSV>(reader)
-                    .withSeparator(',')
-                    .withType(IndiaStateCodeCSV.class)
-                    .withIgnoreLeadingWhiteSpace(true).build();
-        }catch(IOException e){
-            throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }catch(RuntimeException e){
-            throw new CensusAnalyserException("Incorrect delimiter used",
-                    CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER);
-        }
-    }
-
     public int loadIndianStateCode(String csvFilePath) throws CensusAnalyserException{
-        Map mapping=new HashMap();
-        mapping.put("State","state");
-        mapping.put("Population","population");
-        mapping.put("AreaInSqKm","area");
-        mapping.put("DensityPerSqKm","density");
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
+        try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            censusList =  csvBuilder.setCSVMapAndGetList(reader,IndiaStateCodeCSV.class,mapping);
-            return this.censusList.size();
+            List list = csvBuilder.getCSVFileList(reader,IndiaStateCodeCSV.class);
+            return list.size();
+
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
@@ -98,6 +55,11 @@ public class CensusAnalyser {
     private <E>int getCount(Iterator<E> iterator){
         Iterable<E>csvIterable=() -> iterator;
         return (int) StreamSupport.stream(csvIterable.spliterator(),true).count();
+    }
+
+    public int loadUSCensusData(Object usCensusCsvFilePath) {
+
+        return 0;
     }
 
     public String getStateWiseSortedCensusData() throws CensusAnalyserException {
@@ -122,13 +84,15 @@ public class CensusAnalyser {
     }
 
     public String sortWithRespectToColumn(Comparator censusSortColumn) throws CensusAnalyserException {
-        if(censusList==null||censusList.size()==0){
+        if(censusStateMap==null||censusStateMap.size()==0){
             throw new CensusAnalyserException("No Census data ",CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-        censusList.sort(censusSortColumn);
-        String sortedColumnensusjson=new Gson().toJson(this.censusList);
+        List <IndiaCensusDAO> sortedCensusDataWithRespectToColumn= (List<IndiaCensusDAO>) censusStateMap.values().stream().sorted(censusSortColumn)
+                                                                        .collect(Collectors.toList());
+        String sortedColumnensusjson=new Gson().toJson(sortedCensusDataWithRespectToColumn);
         return sortedColumnensusjson;
     }
+
 
 }
 
