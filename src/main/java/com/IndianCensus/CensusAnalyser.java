@@ -1,10 +1,6 @@
 package com.IndianCensus;
 
 import com.google.gson.Gson;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
-import jdk.nashorn.api.scripting.ScriptObjectMirror;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -41,8 +37,12 @@ public class CensusAnalyser {
     public int loadIndianStateCode(String csvFilePath) throws CensusAnalyserException{
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            List list = csvBuilder.getCSVFileList(reader,IndiaStateCodeCSV.class);
-            return list.size();
+            Iterator<IndiaStateCodeCSV> csvStateCodeIterator = csvBuilder.getCSVFileIterator(reader,IndiaStateCodeCSV.class);
+            Iterable<IndiaStateCodeCSV> csvStateCodeIterable=()-> csvStateCodeIterator;
+            StreamSupport.stream(csvStateCodeIterable.spliterator(),false)
+                    .filter(csvStateCode->censusStateMap.get(csvStateCode.state)!=null)
+                    .forEach(csvStateCode->censusStateMap.get(csvStateCode.state).stateCode=csvStateCode.stateCode);
+            return censusStateMap.size();
 
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
