@@ -9,12 +9,12 @@ public class CensusAnalyserTest {
     private static final String WRONG_CSV_FILE_PATH = "milan.txt";
     private static final String INCOMPATIBLE_CSV_FILE_PATH = "C:\\Users\\KYOOLBABAA\\Desktop\\New folder\\Users.csv";
     private static final String INDIAN_STATE_CODES = "C:\\Users\\KYOOLBABAA\\Desktop\\New folder\\StateCode.csv";
-    private static final Object US_CENSUS_CSV_FILE_PATH = "C:\\Users\\KYOOLBABAA\\Desktop\\New folder\\USCensusData.csv";
+    private static final String US_CENSUS_CSV_FILE_PATH = "C:\\Users\\KYOOLBABAA\\Desktop\\New folder\\USCensusData.csv";
     @Test
     public void givenIndianCensusCSVFileReturnsCorrectRecords() {
         try {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
-             int noOfEnteries=censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
+            int noOfEnteries=censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
             Assert.assertEquals(29,noOfEnteries);
         } catch (CensusAnalyserException e) { }
     }
@@ -45,7 +45,7 @@ public class CensusAnalyserTest {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
             censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH);
         } catch (CensusAnalyserException  e) {
-            Assert.assertEquals(CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER,e.type);
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
         }
     }
 
@@ -67,7 +67,7 @@ public class CensusAnalyserTest {
             String sortedCensusData= censusAnalyser.getStateWiseSortedCensusData();
             IndiaCensusCSV[] censusCSV= new Gson().fromJson(sortedCensusData,IndiaCensusCSV[].class);
             Assert.assertEquals("Andhra Pradesh",censusCSV[0].state);
-    }catch(CensusAnalyserException e ){ }
+        }catch(CensusAnalyserException e ){ }
     }
 
     @Test
@@ -147,4 +147,12 @@ public class CensusAnalyserTest {
         }catch(CensusAnalyserException e ){ }
     }
 
+    @Test
+    public void loadUSCensusDataShouldReturnCorrectRecord() {
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            int noOfUSCensusRecords = censusAnalyser.loadUSCensusData(US_CENSUS_CSV_FILE_PATH);
+            Assert.assertEquals(51, noOfUSCensusRecords);
+        }catch(CensusAnalyserException e){}
+    }
 }
