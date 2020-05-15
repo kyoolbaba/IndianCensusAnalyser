@@ -30,8 +30,4 @@ public class CensusDAO {
     public IndiaCensusCSV getIndiaCensusCSV(){
         return new IndiaCensusCSV(state,population,(int )populationDensity, (int) totalArea);
     }
-
-    public USCensusCSV getUSCensusCSV(){
-        return new USCensusCSV(state,stateCode,population,(int )populationDensity, (int) totalArea);
-    }
 }

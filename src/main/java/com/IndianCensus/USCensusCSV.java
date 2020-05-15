@@ -19,11 +19,6 @@ public class USCensusCSV {
     @CsvBindByName(column = "Total area", required = true)
     public double totalArea;
 
-    public USCensusCSV(){}
-
-    public USCensusCSV(String state,String stateId, int population, int populationDensity, int totalArea) {
-    }
-
 
     @Override
     public String toString() {

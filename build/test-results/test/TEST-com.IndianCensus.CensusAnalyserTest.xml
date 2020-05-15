@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.IndianCensus.CensusAnalyserTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2020-05-15T16:51:54" hostname="KYOOLBABA" time="0.462">
+<testsuite name="com.IndianCensus.CensusAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-05-15T17:02:12" hostname="KYOOLBABA" time="0.171">
   <properties/>
-  <testcase name="givenIndianCensusDataWhenSortedPopulationShouldReturnLessPopulatedState" classname="com.IndianCensus.CensusAnalyserTest" time="0.249"/>
-  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="com.IndianCensus.CensusAnalyserTest" time="0.012"/>
-  <testcase name="givenCSVFileWithIncorrectHeader_ShouldThrowAnException" classname="com.IndianCensus.CensusAnalyserTest" time="0.014"/>
-  <testcase name="givenIndianCensusDataWhenSortedByDensityShouldReturnMaxDensityState" classname="com.IndianCensus.CensusAnalyserTest" time="0.021"/>
-  <testcase name="givenIndianCensusDataWhenSortedStateShouldReturnFirstResult" classname="com.IndianCensus.CensusAnalyserTest" time="0.024"/>
-  <testcase name="givenCSVFileWithIncorrectDelimter_ShouldThrowException" classname="com.IndianCensus.CensusAnalyserTest" time="0.011"/>
-  <testcase name="givenIndianCensusDataWhenSortedPopulationShouldReturnMaxAreaState" classname="com.IndianCensus.CensusAnalyserTest" time="0.013"/>
-  <testcase name="givenIndianCensusDataWhenSortedStateShouldReturnLastResult" classname="com.IndianCensus.CensusAnalyserTest" time="0.021"/>
-  <testcase name="givenIndiaCensusData_WithWrongFile_ShouldThrowException" classname="com.IndianCensus.CensusAnalyserTest" time="0.001"/>
-  <testcase name="givenIndianCensusDataWhenSortedByAreaShouldReturnMinAreaState" classname="com.IndianCensus.CensusAnalyserTest" time="0.011"/>
-  <testcase name="givenIndianStateCodeCSVFileReturnsCorrectRecord" classname="com.IndianCensus.CensusAnalyserTest" time="0.018"/>
-  <testcase name="loadUSCensusDataShouldReturnCorrectRecord" classname="com.IndianCensus.CensusAnalyserTest" time="0.016"/>
-  <testcase name="givenIndianCensusDataWhenSortedByDensityShouldReturnMinDensityState" classname="com.IndianCensus.CensusAnalyserTest" time="0.031"/>
-  <testcase name="givenIndianCensusDataWhenSortedPopulationShouldReturnMaxPopulatedState" classname="com.IndianCensus.CensusAnalyserTest" time="0.017"/>
+  <testcase name="loadUSCensusDataShouldReturnCorrectRecord" classname="com.IndianCensus.CensusAnalyserTest" time="0.171"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
