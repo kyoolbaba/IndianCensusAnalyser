@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.IndianCensus.CensusAnalyserTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2020-05-14T15:08:43" hostname="KYOOLBABA" time="0.448">
+<testsuite name="com.IndianCensus.CensusAnalyserTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2020-05-15T03:01:43" hostname="KYOOLBABA" time="0.392">
   <properties/>
-  <testcase name="givenIndianCensusDataWhenSortedPopulationShouldReturnLessPopulatedState" classname="com.IndianCensus.CensusAnalyserTest" time="0.233"/>
-  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="com.IndianCensus.CensusAnalyserTest" time="0.02"/>
-  <testcase name="givenCSVFileWithIncorrectHeader_ShouldThrowAnException" classname="com.IndianCensus.CensusAnalyserTest" time="0.009"/>
-  <testcase name="givenIndianCensusDataWhenSortedByDensityShouldReturnMaxDensityState" classname="com.IndianCensus.CensusAnalyserTest" time="0.026"/>
-  <testcase name="givenIndianCensusDataWhenSortedStateShouldReturnFirstResult" classname="com.IndianCensus.CensusAnalyserTest" time="0.02"/>
-  <testcase name="givenCSVFileWithIncorrectDelimter_ShouldThrowException" classname="com.IndianCensus.CensusAnalyserTest" time="0.005"/>
-  <testcase name="givenIndianCensusDataWhenSortedPopulationShouldReturnMaxAreaState" classname="com.IndianCensus.CensusAnalyserTest" time="0.014"/>
-  <testcase name="givenIndianCensusDataWhenSortedStateShouldReturnLastResult" classname="com.IndianCensus.CensusAnalyserTest" time="0.011"/>
-  <testcase name="givenIndiaCensusData_WithWrongFile_ShouldThrowException" classname="com.IndianCensus.CensusAnalyserTest" time="0.003"/>
-  <testcase name="givenIndianCensusDataWhenSortedByAreaShouldReturnMinAreaState" classname="com.IndianCensus.CensusAnalyserTest" time="0.045"/>
-  <testcase name="givenIndianStateCodeCSVFileReturnsCorrectRecord" classname="com.IndianCensus.CensusAnalyserTest" time="0.024"/>
-  <testcase name="givenIndianCensusDataWhenSortedByDensityShouldReturnMinDensityState" classname="com.IndianCensus.CensusAnalyserTest" time="0.019"/>
-  <testcase name="givenIndianCensusDataWhenSortedPopulationShouldReturnMaxPopulatedState" classname="com.IndianCensus.CensusAnalyserTest" time="0.013"/>
+  <testcase name="givenIndianCensusDataWhenSortedPopulationShouldReturnLessPopulatedState" classname="com.IndianCensus.CensusAnalyserTest" time="0.212"/>
+  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="com.IndianCensus.CensusAnalyserTest" time="0.014"/>
+  <testcase name="givenCSVFileWithIncorrectHeader_ShouldThrowAnException" classname="com.IndianCensus.CensusAnalyserTest" time="0.005"/>
+  <testcase name="givenIndianCensusDataWhenSortedByDensityShouldReturnMaxDensityState" classname="com.IndianCensus.CensusAnalyserTest" time="0.027"/>
+  <testcase name="givenIndianCensusDataWhenSortedStateShouldReturnFirstResult" classname="com.IndianCensus.CensusAnalyserTest" time="0.016"/>
+  <testcase name="givenCSVFileWithIncorrectDelimter_ShouldThrowException" classname="com.IndianCensus.CensusAnalyserTest" time="0.006"/>
+  <testcase name="givenIndianCensusDataWhenSortedPopulationShouldReturnMaxAreaState" classname="com.IndianCensus.CensusAnalyserTest" time="0.019"/>
+  <testcase name="givenIndianCensusDataWhenSortedStateShouldReturnLastResult" classname="com.IndianCensus.CensusAnalyserTest" time="0.01"/>
+  <testcase name="givenIndiaCensusData_WithWrongFile_ShouldThrowException" classname="com.IndianCensus.CensusAnalyserTest" time="0.004"/>
+  <testcase name="givenIndianCensusDataWhenSortedByAreaShouldReturnMinAreaState" classname="com.IndianCensus.CensusAnalyserTest" time="0.023"/>
+  <testcase name="givenIndianStateCodeCSVFileReturnsCorrectRecord" classname="com.IndianCensus.CensusAnalyserTest" time="0.021"/>
+  <testcase name="givenIndianCensusDataWhenSortedByDensityShouldReturnMinDensityState" classname="com.IndianCensus.CensusAnalyserTest" time="0.013"/>
+  <testcase name="givenIndianCensusDataWhenSortedPopulationShouldReturnMaxPopulatedState" classname="com.IndianCensus.CensusAnalyserTest" time="0.012"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

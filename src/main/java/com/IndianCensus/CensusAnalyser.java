@@ -125,24 +125,10 @@ public class CensusAnalyser {
         if(censusList==null||censusList.size()==0){
             throw new CensusAnalyserException("No Census data ",CensusAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-        this.sort(censusSortColumn);
+        censusList.sort(censusSortColumn);
         String sortedColumnensusjson=new Gson().toJson(this.censusList);
         return sortedColumnensusjson;
     }
-
-    private void sort( Comparator<IndiaCensusDAO> censusCSVComparator) {
-        for(int i=0;i<censusList.size();i++){
-            for(int j=0;j<censusList.size()-i-1;j++){
-                IndiaCensusDAO census1=censusList.get(j);
-                IndiaCensusDAO census2=censusList.get(j+1);
-                if(censusCSVComparator.compare(census1,census2)>0){
-                    censusList.set(j,census2);
-                    censusList.set(j+1,census1);
-                }
-            }
-        }
-    }
-
 
 }
 
