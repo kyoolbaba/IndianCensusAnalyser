@@ -3,6 +3,9 @@ package com.IndianCensus;
 
 import jdk.nashorn.internal.runtime.regexp.joni.ast.CClassNode;
 
+import java.util.ArrayList;
+import java.util.stream.Collector;
+
 public class CensusDAO {
 
     public int population;
@@ -27,7 +30,12 @@ public class CensusDAO {
         totalArea = usCensusCSV.totalArea;
     }
 
-    public IndiaCensusCSV getIndiaCensusCSV(){
-        return new IndiaCensusCSV(state,population,(int )populationDensity, (int) totalArea);
+    public Object getCensusDTO(CensusAnalyser.Country country)  {
+        if(country.equals(CensusAnalyser.Country.US))
+            return new USCensusCSV(state,population,populationDensity,totalArea);
+        else {
+            return new IndiaCensusCSV(state,population,(int )populationDensity, (int )totalArea);
+        }
+
     }
 }
